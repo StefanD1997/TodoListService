@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TodoList.Models;
+namespace TodoList.Core.Models;
 
 public class Todo
 {

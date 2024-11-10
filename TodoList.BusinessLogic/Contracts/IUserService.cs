@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TodoList.DTOs.User;
-using TodoList.Models;
+using TodoList.Core.Models;
 
-namespace ToDoList.Services.Contracts
+namespace TodoList.BusinessLogic.Contracts
 {
     public interface IUserService
     {
@@ -15,6 +15,6 @@ namespace ToDoList.Services.Contracts
         Task<User?> Create(CreateUserDTO input);
         Task<User?> Update(UpdateUserDTO input);
         Task<bool> Delete(int id);
-        Task<IEnumerable<UserDTO>> GetAll();   
+        Task<List<UserDTO>> GetAll();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using TodoList.DTOs.Todo;
-using TodoList.Models;
+using TodoList.Core.Models;
 
-namespace TodoList.Services.Contracts;
+namespace TodoList.BusinessLogic.Contracts;
 
 public interface ITodoService
 {
@@ -9,7 +9,7 @@ public interface ITodoService
     Task<Todo?> Check(int id);
     Task<Todo?> Get(int id);
     Task<List<Todo>> Get();
-    Task<Todo> Update(UpdateTodoDTO input);
+    Task<Todo?> Update(UpdateTodoDTO input);
     Task<bool> Delete(int id);
 }
 

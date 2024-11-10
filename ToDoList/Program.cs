@@ -4,78 +4,24 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TodoList;
-using TodoList.Services;
-using TodoList.Services.Contracts;
-using ToDoList.Services.Contracts;
+using TodoList.BusinessLogic.Extensions;
+using TodoList.Core.Common.Contracts;
+using TodoList.DataAccess.ServiceExtensions;
+using TodoList.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "test-issuer",
-            ValidAudience = "test-audience",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.TOKEN_KEY))
-        };
-    });
+builder.Services.AddPresentation(builder.Configuration);
 
 builder.Services.AddAuthorization();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Swagger",
-        Contact = new OpenApiContact
-        {
-            Name = "Behzad Dara",
-            Email = "Behzad.Dara.99@gmail.com",
-            Url = new Uri("https://www.linkedin.com/in/behzaddara/")
-        }
-    });
 
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please insert JWT into field",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "bearer"
-    });
+builder.Services.AddBusiness();
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
-});
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<TodoListDBContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDataAccess(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSingleton(typeof(CurrentUser));
-
-builder.Services.AddScoped(typeof(TokenService));
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ITodoService, TodoService>();
 
 var app = builder.Build();
 

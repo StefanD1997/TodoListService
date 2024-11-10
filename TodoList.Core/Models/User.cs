@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TodoList.Core.Helpers;
 
-namespace TodoList.Models;
+namespace TodoList.Core.Models;
 
 public class User
 {
@@ -15,8 +16,8 @@ public class User
         return new User
         {
             Username = username,
-            HashedPassword = MethodHelper.ComputeSHA512Hash(Constants.PASSWORD_DEFAULT),
-            Role = Constants.ROLE_CUSTOMER
+            HashedPassword = MethodHelper.ComputeSHA512Hash(Constants.Constants.PASSWORD_DEFAULT),
+            Role = Constants.Constants.ROLE_CUSTOMER
         };
     }
 
@@ -26,8 +27,8 @@ public class User
         {
             Id = 1,
             Username = "BehzadDara",
-            HashedPassword = MethodHelper.ComputeSHA512Hash(Constants.PASSWORD_DEFAULT),
-            Role = Constants.ROLE_ADMIN
+            HashedPassword = MethodHelper.ComputeSHA512Hash(Constants.Constants.PASSWORD_DEFAULT),
+            Role = Constants.Constants.ROLE_ADMIN
         };
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TodoList.BusinessLogic.Contracts;
+using TodoList.Core.Constants;
 using TodoList.DTOs.Todo;
 using TodoList.DTOs.User;
-using TodoList.Services.Contracts;
-using ToDoList.Services.Contracts;
 
 namespace TodoList;
 

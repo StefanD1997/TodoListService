@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TodoList.Models;
+using TodoList.Core.Models;
 
-namespace TodoList;
+namespace TodoList.DataAccess;
 
 public class TodoListDBContext(DbContextOptions<TodoListDBContext> options) : DbContext(options)
 {

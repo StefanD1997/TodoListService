@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TodoList.Core\TodoList.Core.csproj" />
+    <ProjectReference Include="..\TodoList.DataAccess\TodoList.DataAccess.csproj" />
+    <ProjectReference Include="..\TodoList.DTOs\TodoList.DTOs.csproj" />
+  </ItemGroup>
+
+</Project>

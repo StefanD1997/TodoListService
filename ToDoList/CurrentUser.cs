@@ -1,7 +1,10 @@
 ﻿using System.Security.Claims;
+using TodoList.Core.Common.Contracts;
 namespace TodoList;
 
-public class CurrentUser(IHttpContextAccessor httpContextAccessor)
+public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUser
 {
-    public string Id => httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+
+    public string Id => _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
 }

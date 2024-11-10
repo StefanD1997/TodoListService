@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace TodoList;
+namespace TodoList.Core.Helpers;
 
 public static class MethodHelper
 {
