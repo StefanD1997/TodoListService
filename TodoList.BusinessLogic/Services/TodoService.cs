@@ -67,7 +67,7 @@ public class TodoService(
 
     public async Task<Todo?> Update(UpdateTodoDTO input)
     {
-        var todo = await _todoRepository.GetById(input.Id);
+        Todo? todo = await _todoRepository.GetById(input.Id);
 
         if (todo is null)
         {
@@ -79,6 +79,7 @@ public class TodoService(
         todo.Title = input.Title;
         todo.IsDone = input.IsDone;
 
+        _todoRepository.Update(todo);
         await _todoRepository.SaveChangesAsync();
 
         return todo;
